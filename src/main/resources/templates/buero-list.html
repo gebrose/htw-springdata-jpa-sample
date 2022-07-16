@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="/main.css" rel="stylesheet" type="text/css">
+    <title>Büros</title>
+</head>
+
+<body>
+<h2>Büros</h2>
+
+<h3>New</h3>
+<div>
+    <form action="#"
+          enctype="multipart/form-data"
+          method="POST"
+          th:action="@{'/ui/bueros'}"
+          th:object="${bueroTemplate}">
+        <div>
+            <label>name</label>
+            <input id="Name" placeholder="Enter Name" th:field="*{name}"
+                   type="text"/>
+        </div>
+        <div>
+            <label>Raumnummer</label>
+            <input id="roomNumber" th:field="*{raumnummer}" type="text"/>
+        </div>
+        <div>
+            <label>Kapazität</label>
+            <input id="Kapazität" th:field="*{kapazitaet}" type="number"/>
+        </div>
+        <!-- TODO: fehlende Attribute ergänzen -->
+        <input class="btn" type="submit" value="save" width="60"/>
+    </form>
+</div>
+
+<h3>List</h3>
+<table>
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Raumnummer</td>
+        <td>Kapazität</td>
+        <td>Höhe</td>
+        <td>Fläche</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="b: ${bueros}" th:value="${b}">
+        <td>
+            <span th:text="${b.id}"></span>
+        </td>
+        <td>
+            <a th:href="@{'/ui/bueros/' + ${b.id}}">
+                <span th:text="${b.name}"></span>
+            </a>
+        </td>
+        <td>
+            <span th:text="${b.raumnummer}"></span>
+        </td>
+        <td>
+            <span th:text="${b.kapazitaet}"></span>
+        </td>
+        <td>
+            <span th:text="${b.hoehe}"></span>
+        </td>
+        <td>
+            <span th:text="${b.flaeche}"></span>
+        </td>
+        <td>
+            <form action="#"
+                  enctype="multipart/form-data"
+                  th:action="@{'/ui/bueros/'+ ${b.id}}"
+                  th:method="DELETE">
+                <input class="btn" type="submit" value="Delete" width="60"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+
+
+</table>
+</body>
