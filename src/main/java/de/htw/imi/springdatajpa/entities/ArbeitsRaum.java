@@ -1,9 +1,18 @@
-package de.htw.imi.springdatajpa.entities.entities;
+package de.htw.imi.springdatajpa.entities;
 
-import javax.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
 
-@MappedSuperclass
-public abstract class ArbeitsRaum extends Raum {
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
+@javax.persistence.Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(schema = "uni", name = "Arbeitsraeume")
+@Getter
+@Setter
+class ArbeitsRaum extends Raum {
 
     private int kapazitaet;
 
@@ -11,11 +20,4 @@ public abstract class ArbeitsRaum extends Raum {
         super();
     }
 
-    public int getKapazitaet() {
-        return kapazitaet;
-    }
-
-    public void setKapazitaet(int kapazitaet) {
-        this.kapazitaet = kapazitaet;
-    }
 }

@@ -1,4 +1,7 @@
-package de.htw_berlin.imi.db.web;
+package de.htw.imi.springdatajpa.web;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Data transfer object (DTO) class:
@@ -7,6 +10,8 @@ package de.htw_berlin.imi.db.web;
  * NB: we cannot create BueroRaum objects without an id.
  * Objects of this class simply hold field values
  */
+@Getter
+@Setter
 public class BueroDto {
 
     private String name;
@@ -15,30 +20,8 @@ public class BueroDto {
 
     private int kapazitaet;
 
-    // TODO: add missing fields
+    private int flaeche;
 
+    private int hoehe;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getRaumnummer() {
-        return raumnummer;
-    }
-
-    public void setRaumnummer(final String raumnummer) {
-        this.raumnummer = raumnummer;
-    }
-
-    public int getKapazitaet() {
-        return kapazitaet;
-    }
-
-    public void setKapazitaet(final int kapazitaet) {
-        this.kapazitaet = kapazitaet;
-    }
 }

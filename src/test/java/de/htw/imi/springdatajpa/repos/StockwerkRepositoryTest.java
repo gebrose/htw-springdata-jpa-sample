@@ -2,13 +2,11 @@ package de.htw.imi.springdatajpa.repos;
 
 import de.htw.imi.springdatajpa.entities.Raum;
 import de.htw.imi.springdatajpa.entities.Stockwerk;
-import de.htw.imi.springdatajpa.Application;
 import de.htw.imi.springdatajpa.services.StockwerkService;
 import de.htw.imi.springdatajpa.web.StockwerkDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +14,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class StockwerkEntityServiceTest extends AbstractEntityServiceTest {
+class StockwerkRepositoryTest extends AbstractRepositoryTest {
 
     @Autowired
     StockwerkRepository stockwerkRepository;

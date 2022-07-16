@@ -1,38 +1,26 @@
-package de.htw.imi.springdatajpa.entities.entities;
+package de.htw.imi.springdatajpa.entities;
 
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @javax.persistence.Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Stockwerk extends Entity {
+@Table(schema = "uni", name = "stockwerke")
+@Getter
+@Setter
+public class Stockwerk extends HTWEntity {
 
     private int geschossnummer;
 
-    @OneToMany
-    // 1:n relationship, mapped by FK geschoss_id in raum
+    @OneToMany(mappedBy = "stockwerk", fetch = FetchType.EAGER)
     private List<Raum> raeume = new ArrayList<>();
 
     public Stockwerk() {
         super();
     }
 
-    public int getGeschossnummer() {
-        return geschossnummer;
-    }
-
-    public void setGeschossnummer(final int geschossnummer) {
-        this.geschossnummer = geschossnummer;
-    }
-
-    public List<Raum> getRaeume() {
-        return raeume;
-    }
-
-    public void setRaeume(final List<Raum> raeume) {
-        this.raeume = raeume;
-    }
 }

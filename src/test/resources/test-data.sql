@@ -131,36 +131,36 @@ VALUES (24002, 'Xenokrates', 'Anon', '1998-01-01', 'Athen', 2, 'WS 2021'),
        (29120, 'Theophrastos', 'Anon', '2000-01-01', 'Berlin', 4, 'WS 2020'),
        (29555, 'Feuerbach', 'Ludwig', '2000-01-01', 'Berlin', 4, 'WS 2020');
 
-INSERT INTO uni.professoren(pers_nr, name, rang, raum, gehalt)
-VALUES (2125, 'Sokrates', 'C4', 1, 58000),
-       (2126, 'Russel', 'C4', 7, 60000),
-       (2127, 'Kopernikus', 'C3', 11, 60000),
-       (2133, 'Popper', 'C3', 11, 60000),
-       (2134, 'Augustinus', 'C3', 11, 55000),
-       (2136, 'Curie', 'C4', 8, 62000),
-       (2137, 'Kant', 'C4', 9, 59000),
-       (2138, 'Meitner', 'C4', 10, 65000);
+INSERT INTO uni.professoren(id, pers_nr, name, rang, raum, gehalt)
+VALUES (125, 2125, 'Sokrates', 'C4', 1, 58000),
+       (126, 2126, 'Russel', 'C4', 7, 60000),
+       (127, 2127, 'Kopernikus', 'C3', 11, 60000),
+       (133, 2133, 'Popper', 'C3', 11, 60000),
+       (134, 2134, 'Augustinus', 'C3', 11, 55000),
+       (136, 2136, 'Curie', 'C4', 8, 62000),
+       (137, 2137, 'Kant', 'C4', 9, 59000),
+       (138, 2138, 'Meitner', 'C4', 10, 65000);
 
 INSERT INTO uni.mitarbeiter(pers_nr, name, fachgebiet, gehalt, arbeitet_fuer_professor)
-VALUES (3002, 'Platon', 'Ideenlehre', 45500, 2125),
-       (3003, 'Aristoteles', 'Syllogistik', 45500, 2125),
-       (3004, 'Wittgenstein', 'Sprachtheorie', 48500, 2126),
-       (3005, 'Rhetikus', 'Planetenbewegung', 50000, 2127),
-       (3006, 'Newton', 'Keplersche Gesetze', 52500, 2127),
-       (3007, 'Spinoza', 'Gott und Natur', 45000, 2134),
-       (3008, 'Arendt', 'Totale Herrschaft', 48800, 2126);
+VALUES (3002, 'Platon', 'Ideenlehre', 45500,            125),
+       (3003, 'Aristoteles', 'Syllogistik', 45500,      125),
+       (3004, 'Wittgenstein', 'Sprachtheorie', 48500,   126),
+       (3005, 'Rhetikus', 'Planetenbewegung', 50000,    127),
+       (3006, 'Newton', 'Keplersche Gesetze', 52500,    127),
+       (3007, 'Spinoza', 'Gott und Natur', 45000,       134),
+       (3008, 'Arendt', 'Totale Herrschaft', 48800,     126);
 
 INSERT INTO uni.lehrveranstaltungen(lv_nr, titel, leistungs_punkte, max_teilnehmer, gehalten_von_professor)
-VALUES (5001, 'Grundzuege', 4, 50, 2137),
-       (5041, 'Ethik', 4, 100, 2125),
-       (5043, 'Erkenntnistheorie', 3, 20, 2126),
-       (5049, 'Maeeutik', 2, 20, 2125),
-       (4052, 'Logik', 4, 20, 2125),
-       (5052, 'Wissenschaftstheorie', 3, 20, 2126),
-       (5216, 'Bioethik', 2, 20, 2126),
-       (5259, 'Der Wiener Kreis', 2, 20, 2133),
-       (5022, 'Glaube und Wissen', 2, 20, 2134),
-       (4630, 'Die 3 Kritiken', 4, 20, 2137);
+VALUES (5001, 'Grundzuege', 4, 50,          137),
+       (5041, 'Ethik', 4, 100,              125),
+       (5043, 'Erkenntnistheorie', 3, 20,   126),
+       (5049, 'Maeeutik', 2, 20,            125),
+       (4052, 'Logik', 4, 20,               125),
+       (5052, 'Wissenschaftstheorie', 3, 20,126),
+       (5216, 'Bioethik', 2, 20,            126),
+       (5259, 'Der Wiener Kreis', 2, 20,    133),
+       (5022, 'Glaube und Wissen', 2, 20,   134),
+       (4630, 'Die 3 Kritiken', 4, 20,      137);
 
 INSERT INTO uni.teilnehmen(matr_nr, lv_nr)
 VALUES (26120, 5001),
@@ -187,6 +187,6 @@ VALUES (5001, 5041),
        (5052, 5259);
 
 INSERT INTO uni.pruefen(matr_nr, lv_nr, pers_nr, note)
-VALUES (28106, 5001, 2126, 1.0),
-       (25403, 5041, 2125, 2.0),
-       (27550, 4630, 2137, 2.0);
+VALUES (28106, 5001, 126, 1.0),
+       (25403, 5041, 125, 2.0),
+       (27550, 4630, 137, 2.0);

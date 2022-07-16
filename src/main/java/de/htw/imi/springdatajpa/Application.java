@@ -1,4 +1,4 @@
-package de.htw.imi.springdatajpa.sample;
+package de.htw.imi.springdatajpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

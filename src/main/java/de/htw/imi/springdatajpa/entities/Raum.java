@@ -1,55 +1,36 @@
-package de.htw.imi.springdatajpa.entities.entities;
+package de.htw.imi.springdatajpa.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 /**
  * Base class for all rooms.
  */
 @javax.persistence.Entity
-public abstract class Raum extends Entity {
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(schema = "uni", name = "raeume")
+@Getter
+@Setter
+public class Raum extends HTWEntity {
 
     private String name;
+
     private String raumnummer;
+
     private double flaeche;
+
+    @Column(name = "raumhoehe")
     private double hoehe;
-    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "stockwerk")
+    private Stockwerk stockwerk;
 
     protected Raum() {
         super();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getRaumnummer() {
-        return raumnummer;
-    }
-
-    public void setRaumnummer(final String raumnummer) {
-        this.raumnummer = raumnummer;
-    }
-
-    public double getFlaeche() {
-        return flaeche;
-    }
-
-    public void setFlaeche(final double flaeche) {
-        this.flaeche = flaeche;
-    }
-
-    public double getHoehe() {
-        return hoehe;
-    }
-
-    public void setHoehe(final double hoehe) {
-        this.hoehe = hoehe;
-    }
 
 }

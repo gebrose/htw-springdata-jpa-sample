@@ -1,59 +1,32 @@
-package de.htw.imi.springdatajpa.entities.entities;
+package de.htw.imi.springdatajpa.entities;
 
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @javax.persistence.Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Professor extends Entity {
+@Table(schema = "uni", name = "professoren")
+@Getter
+@Setter
+public class Professor extends HTWEntity {
 
-    private String name;
+    @Column(name = "pers_nr")
+    private String personalNummer;
+
+    private String name = "N.N.";
 
     private String rang;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "raum")
     private BueroRaum raum;
 
     private int gehalt;
 
     public Professor() {
         super();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getRang() {
-        return rang;
-    }
-
-    public void setRang(final String rang) {
-        this.rang = rang;
-    }
-
-    /**
-     * models a one-to-one relationship to offices
-     */
-    public BueroRaum getRaum() {
-        return raum;
-    }
-
-    public void setRaum(final BueroRaum raum) {
-        this.raum = raum;
-    }
-
-    public int getGehalt() {
-        return gehalt;
-    }
-
-    public void setGehalt(final int gehalt) {
-        this.gehalt = gehalt;
     }
 
 }

@@ -29,6 +29,7 @@
             <label>Kapazität</label>
             <input id="Kapazität" th:field="*{kapazitaet}" type="number"/>
         </div>
+
         <!-- TODO: fehlende Attribute ergänzen -->
         <input class="btn" type="submit" value="save" width="60"/>
     </form>
@@ -44,6 +45,7 @@
         <td>Kapazität</td>
         <td>Höhe</td>
         <td>Fläche</td>
+        <td>Geschossnummer</td>
     </tr>
     </thead>
 
@@ -68,6 +70,9 @@
         </td>
         <td>
             <span th:text="${b.flaeche}"></span>
+        </td>
+        <td>
+            <span th:if="${b.stockwerk != null}" th:text="${b.stockwerk.geschossnummer}"></span>
         </td>
         <td>
             <form action="#"

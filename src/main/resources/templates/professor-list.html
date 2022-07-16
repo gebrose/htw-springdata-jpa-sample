@@ -3,31 +3,23 @@
 
 <head>
     <link href="/main.css" rel="stylesheet" type="text/css">
-    <title>Büros</title>
+    <title>Professoren</title>
 </head>
 
 <body>
-<h2>Büros</h2>
+<h2>Professoren</h2>
 
 <h3>New</h3>
 <div>
     <form action="#"
           enctype="multipart/form-data"
           method="POST"
-          th:action="@{'/ui/bueros'}"
-          th:object="${bueroTemplate}">
+          th:action="@{'/ui/professoren'}"
+          th:object="${professorTemplate}">
         <div>
             <label>name</label>
             <input id="Name" placeholder="Enter Name" th:field="*{name}"
                    type="text"/>
-        </div>
-        <div>
-            <label>Raumnummer</label>
-            <input id="roomNumber" th:field="*{raumnummer}" type="text"/>
-        </div>
-        <div>
-            <label>Kapazität</label>
-            <input id="Kapazität" th:field="*{kapazitaet}" type="number"/>
         </div>
 
         <!-- TODO: fehlende Attribute ergänzen -->
@@ -41,47 +33,36 @@
     <tr>
         <td>Id</td>
         <td>Name</td>
-        <td>Raumnummer</td>
-        <td>Kapazität</td>
-        <td>Höhe</td>
-        <td>Fläche</td>
-        <td>Geschossnummer</td>
+        <td>Personalnummer</td>
+        <td>Rang</td>
+        <td>Gehalt</td>
+        <td>Raum</td>
     </tr>
     </thead>
 
     <tbody>
-    <tr th:each="b: ${bueros}" th:value="${b}">
+    <tr th:each="b: ${professoren}" th:value="${b}">
         <td>
             <span th:text="${b.id}"></span>
         </td>
         <td>
-            <a th:href="@{'/ui/bueros/' + ${b.id}}">
+            <a th:href="@{'/ui/professoren/' + ${b.id}}">
                 <span th:text="${b.name}"></span>
             </a>
         </td>
         <td>
-            <span th:text="${b.raumnummer}"></span>
+            <span th:text="${b.personalNummer}"></span>
         </td>
         <td>
-            <span th:text="${b.kapazitaet}"></span>
+            <span th:text="${b.rang}"></span>
         </td>
         <td>
-            <span th:text="${b.hoehe}"></span>
+            <span th:text="${b.gehalt}"></span>
         </td>
         <td>
-            <span th:text="${b.flaeche}"></span>
+            <span th:if="${b.raum != null}" th:text="${b.raum.name}"></span>
         </td>
-        <td>
-            <span th:if="${b.stockwerk != null}" th:text="${b.stockwerk.geschossnummer}"></span>
-        </td>
-        <td>
-            <form action="#"
-                  enctype="multipart/form-data"
-                  th:action="@{'/ui/bueros/'+ ${b.id}}"
-                  th:method="DELETE">
-                <input class="btn" type="submit" value="Delete" width="60"/>
-            </form>
-        </td>
+
     </tr>
     </tbody>
 

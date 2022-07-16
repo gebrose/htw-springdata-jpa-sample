@@ -1,8 +1,8 @@
 package de.htw.imi.springdatajpa.services;
 
-import de.htw.imi.springdatajpa.entities.Stockwerk;
-import de.htw.imi.springdatajpa.repos.StockwerkRepository;
-import de.htw.imi.springdatajpa.web.StockwerkDto;
+import de.htw.imi.springdatajpa.entities.BueroRaum;
+import de.htw.imi.springdatajpa.repos.BueroRaumRepository;
+import de.htw.imi.springdatajpa.web.BueroDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,15 +17,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class StockwerkService  {
+public class BueroRaumService {
 
     @Autowired
-    StockwerkRepository stockwerkRepository;
+    BueroRaumRepository bueroRaumRepository;
 
-    public Stockwerk createFrom(final StockwerkDto template) {
-        final Stockwerk stockwerk = new Stockwerk();
-        stockwerk.setGeschossnummer(template.getGeschossnummer());
-        return stockwerkRepository.save(stockwerk);
+    public BueroRaum createFrom(final BueroDto template) {
+        final BueroRaum bueroRaum = new BueroRaum();
+        bueroRaum.setFlaeche(template.getFlaeche());
+        bueroRaum.setName(template.getName());
+        bueroRaum.setHoehe(template.getHoehe());
+        bueroRaum.setKapazitaet(template.getKapazitaet());
+        bueroRaum.setRaumnummer(template.getRaumnummer());
+        return bueroRaumRepository.save(bueroRaum);
     }
 
 }

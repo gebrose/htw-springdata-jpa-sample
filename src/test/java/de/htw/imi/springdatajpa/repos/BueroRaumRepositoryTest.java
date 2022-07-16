@@ -1,7 +1,8 @@
-package de.htw_berlin.imi.db.services;
+package de.htw.imi.springdatajpa.repos;
 
-import de.htw_berlin.imi.db.entities.BueroRaum;
-import de.htw_berlin.imi.db.web.BueroDto;
+import de.htw.imi.springdatajpa.entities.BueroRaum;
+import de.htw.imi.springdatajpa.services.BueroRaumService;
+import de.htw.imi.springdatajpa.web.BueroDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,14 +13,17 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class BueroRaumEntityServiceTest extends AbstractEntityServiceTest {
+class BueroRaumRepositoryTest extends AbstractRepositoryTest {
 
     @Autowired
-    BueroRaumEntityService bueroRaumEntityService;
+    BueroRaumRepository bueroRaumRepository;
+
+    @Autowired
+    private BueroRaumService bueroRaumService;
 
     @Test
     void findAll() {
-        final List<BueroRaum> all = bueroRaumEntityService.findAll();
+        final List<BueroRaum> all = bueroRaumRepository.findAll();
         assertThat(all).isNotEmpty();
         assertThat(all)
                 .extracting(BueroRaum::getId)
@@ -28,30 +32,30 @@ class BueroRaumEntityServiceTest extends AbstractEntityServiceTest {
 
     @Test
     void findById() {
-        final Optional<BueroRaum> bueroRaumOptional = bueroRaumEntityService.findById(10);
+        final Optional<BueroRaum> bueroRaumOptional = bueroRaumRepository.findById(10L);
         assertThat(bueroRaumOptional).isPresent();
         assertThat(bueroRaumOptional.get().getName()).isEqualTo("Office#5");
     }
 
     @Test
     void cannotfindById() {
-        final Optional<BueroRaum> bueroRaumOptional = bueroRaumEntityService.findById(0);
+        final Optional<BueroRaum> bueroRaumOptional = bueroRaumRepository.findById(0L);
         assertThat(bueroRaumOptional).isNotPresent();
     }
 
     @Test
     void createNew() {
-        final BueroRaum bueroRaum = bueroRaumEntityService.create();
+        final BueroRaum bueroRaum = bueroRaumRepository.save(new BueroRaum());
         assertThat(bueroRaum).isNotNull();
         assertThat(bueroRaum.getId()).isPositive();
 
-        final BueroRaum bueroRaum2 = bueroRaumEntityService.create();
+        final BueroRaum bueroRaum2 = bueroRaumRepository.save(new BueroRaum());
         assertThat(bueroRaum.getId()).isLessThan(bueroRaum2.getId());
     }
 
     @Test
     void save() {
-        final BueroRaum bueroRaum = bueroRaumEntityService.create();
+        final BueroRaum bueroRaum = bueroRaumRepository.save(new BueroRaum());
         final String roomNumber = "#" + bueroRaum.getId();
         final String name = "Test Room " + roomNumber;
         bueroRaum.setRaumnummer(roomNumber);
@@ -60,9 +64,9 @@ class BueroRaumEntityServiceTest extends AbstractEntityServiceTest {
         bueroRaum.setFlaeche(25.4);
         bueroRaum.setKapazitaet(2);
 
-        bueroRaumEntityService.save(bueroRaum);
+        bueroRaumRepository.save(bueroRaum);
 
-        final Optional<BueroRaum> bueroRaumOptional = bueroRaumEntityService.findById(bueroRaum.getId());
+        final Optional<BueroRaum> bueroRaumOptional = bueroRaumRepository.findById(bueroRaum.getId());
         assertThat(bueroRaumOptional).isPresent();
         assertThat(bueroRaumOptional.get().getName()).isEqualTo(name);
         assertThat(bueroRaumOptional.get().getRaumnummer()).isEqualTo(roomNumber);
@@ -73,7 +77,7 @@ class BueroRaumEntityServiceTest extends AbstractEntityServiceTest {
 
     @Test
     void delete() {
-        final BueroRaum bueroRaum = bueroRaumEntityService.create();
+        final BueroRaum bueroRaum = bueroRaumRepository.save(new BueroRaum());
         final String roomNumber = "#" + bueroRaum.getId();
         final String name = "Test Room " + roomNumber;
         bueroRaum.setRaumnummer(roomNumber);
@@ -82,10 +86,10 @@ class BueroRaumEntityServiceTest extends AbstractEntityServiceTest {
         bueroRaum.setFlaeche(25.4);
         bueroRaum.setKapazitaet(2);
 
-        bueroRaumEntityService.save(bueroRaum);
-        bueroRaumEntityService.delete(bueroRaum);
+        bueroRaumRepository.save(bueroRaum);
+        bueroRaumRepository.delete(bueroRaum);
 
-        final Optional<BueroRaum> bueroRaumOptional = bueroRaumEntityService.findById(bueroRaum.getId());
+        final Optional<BueroRaum> bueroRaumOptional = bueroRaumRepository.findById(bueroRaum.getId());
         assertThat(bueroRaumOptional).isNotPresent();
     }
 
@@ -98,9 +102,9 @@ class BueroRaumEntityServiceTest extends AbstractEntityServiceTest {
         bueroRaum.setName(name);
         bueroRaum.setKapazitaet(2);
 
-        final BueroRaum from = bueroRaumEntityService.createFrom(bueroRaum);
+        final BueroRaum from = bueroRaumService.createFrom(bueroRaum);
 
-        final Optional<BueroRaum> bueroRaumOptional = bueroRaumEntityService.findById(from.getId());
+        final Optional<BueroRaum> bueroRaumOptional = bueroRaumRepository.findById(from.getId());
         assertThat(bueroRaumOptional).isPresent();
         assertThat(bueroRaumOptional.get().getName()).isEqualTo(name);
         assertThat(bueroRaumOptional.get().getRaumnummer()).isEqualTo(roomNumber);
@@ -110,13 +114,13 @@ class BueroRaumEntityServiceTest extends AbstractEntityServiceTest {
 
     @Test
     void update() {
-        final Optional<BueroRaum> bueroRaumOptional = bueroRaumEntityService.findById(11);
+        final Optional<BueroRaum> bueroRaumOptional = bueroRaumRepository.findById(11L);
         final String name = "" + System.currentTimeMillis();
         bueroRaumOptional.ifPresent(b -> {
             b.setName(name);
-            bueroRaumEntityService.update(b);
+            bueroRaumRepository.save(b);
         });
-        final Optional<BueroRaum> reloadedOffice = bueroRaumEntityService.findById(11);
+        final Optional<BueroRaum> reloadedOffice = bueroRaumRepository.findById(11L);
         assertThat(reloadedOffice).isPresent();
         assertThat(reloadedOffice.get().getName()).isEqualTo(name);
     }

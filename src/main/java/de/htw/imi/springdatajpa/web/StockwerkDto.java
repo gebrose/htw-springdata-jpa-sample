@@ -1,4 +1,4 @@
-package de.htw_berlin.imi.db.web;
+package de.htw.imi.springdatajpa.web;
 
 public class StockwerkDto {
     private int geschossnummer;

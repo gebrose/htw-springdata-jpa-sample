@@ -1,54 +1,54 @@
 package de.htw.imi.springdatajpa.web;
 
-import de.htw.imi.springdatajpa.repos.BueroRaumRepository;
-import de.htw.imi.springdatajpa.services.BueroRaumService;
+import de.htw.imi.springdatajpa.repos.ProfessorRepository;
+import de.htw.imi.springdatajpa.services.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class BueroRaumMvcController {
+public class ProfessorMvcController {
 
     @Autowired
-    BueroRaumRepository bueroRaumRepository;
+    ProfessorRepository professorRepository;
 
     @Autowired
-    BueroRaumService bueroRaumService;
+    ProfessorService professorService;
 
-    @GetMapping(path = "/ui/bueros")
+    @GetMapping(path = "/ui/professoren")
     String findAll(final Model model) {
-        model.addAttribute("bueros", bueroRaumRepository.findAll());
+        model.addAttribute("professoren", professorRepository.findAll());
         // empty template object that accepts fiel values from
         // the HTML form when new office room objetcs are created
-        model.addAttribute("bueroTemplate", new BueroDto());
-        return "buero-list";
+        model.addAttribute("professorTemplate", new ProfessorDto());
+        return "professor-list";
     }
 
-    @GetMapping("/ui/bueros/{id}")
+    @GetMapping("/ui/professoren/{id}")
     String find(final Model model,
                 @PathVariable("id") final Long id) {
-        model.addAttribute("buero",
-                bueroRaumRepository
+        model.addAttribute("professor",
+                professorRepository
                         .findById(id)
                         .orElseThrow(IllegalArgumentException::new));
-        return "buero-detail.html";
+        return "professor-detail.html";
     }
 
-    @PostMapping("/ui/bueros")
-    String createBuero(@ModelAttribute("bueroTemplate") final BueroDto bueroTemplate) {
-        bueroRaumService.createFrom(bueroTemplate);
+    @PostMapping("/ui/professoren")
+    String createBuero(@ModelAttribute("professorTemplate") final ProfessorDto professorDto) {
+        professorService.createFrom(professorDto);
         // causes a page reload
-        return "redirect:/ui/bueros";
+        return "redirect:/ui/professoren";
     }
 
-    @DeleteMapping("/ui/bueros/{id}")
+    @DeleteMapping("/ui/professoren/{id}")
     String deleteBuero(@PathVariable("id") final Long id) {
-        bueroRaumRepository
+        professorRepository
                 .findById(id)
-                .ifPresent(b -> bueroRaumRepository.delete(b));
+                .ifPresent(b -> professorRepository.delete(b));
         // causes a page reload
-        return "redirect:/ui/bueros";
+        return "redirect:/ui/professoren";
     }
 
 }

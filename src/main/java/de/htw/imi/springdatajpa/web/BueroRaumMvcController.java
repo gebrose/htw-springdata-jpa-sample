@@ -1,49 +1,52 @@
-package de.htw_berlin.imi.db.web;
+package de.htw.imi.springdatajpa.web;
 
-import de.htw_berlin.imi.db.services.BueroRaumEntityService;
+import de.htw.imi.springdatajpa.repos.BueroRaumRepository;
+import de.htw.imi.springdatajpa.services.BueroRaumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller()
-@RequestMapping(path = "/ui/bueros")
+@Controller
 public class BueroRaumMvcController {
 
     @Autowired
-    BueroRaumEntityService bueroRaumEntityService;
+    BueroRaumRepository bueroRaumRepository;
 
-    @GetMapping
+    @Autowired
+    BueroRaumService bueroRaumService;
+
+    @GetMapping(path = "/ui/bueros")
     String findAll(final Model model) {
-        model.addAttribute("bueros", bueroRaumEntityService.findAll());
+        model.addAttribute("bueros", bueroRaumRepository.findAll());
         // empty template object that accepts fiel values from
         // the HTML form when new office room objetcs are created
         model.addAttribute("bueroTemplate", new BueroDto());
-        return "bueros";
+        return "buero-list";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/ui/bueros/{id}")
     String find(final Model model,
-                @PathVariable("id") final long id) {
+                @PathVariable("id") final Long id) {
         model.addAttribute("buero",
-                bueroRaumEntityService
+                bueroRaumRepository
                         .findById(id)
                         .orElseThrow(IllegalArgumentException::new));
-        return "buero-detail";
+        return "buero-detail.html";
     }
 
-    @PostMapping("")
+    @PostMapping("/ui/bueros")
     String createBuero(@ModelAttribute("bueroTemplate") final BueroDto bueroTemplate) {
-        bueroRaumEntityService.createFrom(bueroTemplate);
+        bueroRaumService.createFrom(bueroTemplate);
         // causes a page reload
         return "redirect:/ui/bueros";
     }
 
-    @DeleteMapping("/{id}")
-    String deleteBuero(@PathVariable("id") final long id) {
-        bueroRaumEntityService
+    @DeleteMapping("/ui/bueros/{id}")
+    String deleteBuero(@PathVariable("id") final Long id) {
+        bueroRaumRepository
                 .findById(id)
-                .ifPresent(b -> bueroRaumEntityService.delete(b));
+                .ifPresent(b -> bueroRaumRepository.delete(b));
         // causes a page reload
         return "redirect:/ui/bueros";
     }

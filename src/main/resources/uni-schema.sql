@@ -158,7 +158,8 @@ CREATE TABLE uni.studierende
 
 CREATE TABLE uni.professoren
 (
-    pers_nr INTEGER PRIMARY KEY,
+    id      INTEGER PRIMARY KEY,
+    pers_nr INTEGER,
     name    VARCHAR(30) NOT NULL,
     rang    CHAR(2) CHECK (rang in ('C2', 'C3', 'C4')),
     raum    INTEGER     REFERENCES uni.Bueroraeume ON DELETE SET NULL,

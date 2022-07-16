@@ -16,7 +16,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Entity {
+public abstract class HTWEntity {
 
     /**
      * Unique Id as primary key.
@@ -33,9 +33,10 @@ public abstract class Entity {
                     @Parameter(name = "initial_value", value = "1000"),
                     @Parameter(name = "increment_size", value = "1")
             }
-    )    protected Long id;
+    )
+    protected Long id;
 
-    public Entity() {
+    public HTWEntity() {
     }
 
 }

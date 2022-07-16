@@ -222,5 +222,4 @@ FROM uni.Raeume r
          JOIN uni.Arbeitsraeume a ON a.id = r.id
          JOIN uni.Bueroraeume b ON b.id = r.id;
 
-CREATE SEQUENCE IF NOT EXISTS uni.id_sequence
-    START 1000;
+CREATE SEQUENCE uni.id_sequence START WITH 1000;

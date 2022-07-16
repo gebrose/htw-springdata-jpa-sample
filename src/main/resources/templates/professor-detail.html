@@ -3,13 +3,13 @@
 
 <head>
     <link href="/main.css" rel="stylesheet" type="text/css">
-    <title>Büros</title>
+    <title>Professor</title>
 </head>
 
 <body>
-<h2>Büro</h2>
+<h2>Professor</h2>
 
-<div th:each="b: ${buero}" th:value="${b}">
+<div th:each="b: ${professor}" th:value="${b}">
     <div>
         <label>Id</label>
         <span th:text="${b.id}"></span>
@@ -19,20 +19,20 @@
         <span th:text="${b.name}"></span>
     </div>
     <div>
-        <label>Raumnummer</label>
-        <span th:text="${b.raumnummer}"></span>
+        <label>Personalnummer</label>
+        <span th:text="${b.personalNummer}"></span>
     </div>
     <div>
-        <label>Kapazität</label>
-        <span th:text="${b.kapazitaet}"></span>
+        <label>Rang</label>
+        <span th:text="${b.rang}"></span>
     </div>
     <div>
-        <label>Höhe</label>
-        <span th:text="${b.hoehe}"></span>
+        <label>Gehalt</label>
+        <span th:text="${b.gehalt}"></span>
     </div>
     <div>
-        <label>Fläche</label>
-        <span th:text="${b.flaeche}"></span>
+        <label>Raum</label>
+        <span th:if="${b.raum != null}" th:text="${b.raum.name}"></span>
     </div>
 
 </div>
