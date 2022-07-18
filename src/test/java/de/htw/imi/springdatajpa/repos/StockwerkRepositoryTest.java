@@ -7,6 +7,7 @@ import de.htw.imi.springdatajpa.web.StockwerkDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;

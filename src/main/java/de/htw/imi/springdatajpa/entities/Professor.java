@@ -19,7 +19,7 @@ public class Professor extends HTWEntity {
 
     private String rang;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "raum")
     private BueroRaum raum;
 

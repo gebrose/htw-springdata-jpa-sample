@@ -7,6 +7,10 @@ import de.htw.imi.springdatajpa.web.ProfessorDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +41,23 @@ class ProfessorRepositoryTest extends AbstractRepositoryTest {
         assertThat(professorOptional).isPresent();
         assertThat(professorOptional.get().getName()).isEqualTo("Sokrates");
     }
+
+    @Test
+    void findByRang() {
+        Pageable pageable = PageRequest.of(1,2, Sort.by(Sort.Order.desc("name")));
+        Page<Professor> professorPage = professorRepository.findByRang(pageable, "C4");
+        assertThat(professorPage.getTotalElements()).isEqualTo(5);
+        assertThat(professorPage.getTotalPages()).isEqualTo(3);
+        Professor firstProfessorBySort = professorPage.get().findFirst().orElseThrow();
+        assertThat(firstProfessorBySort.getName()).isEqualTo("Meitner");
+
+        pageable = PageRequest.of(0,10, Sort.by(Sort.Order.asc("name")));
+        professorPage = professorRepository.findByRang(pageable, "C4");
+        assertThat(professorPage.getTotalElements()).isEqualTo(5);
+        assertThat(professorPage.getTotalPages()).isEqualTo(1);
+        firstProfessorBySort = professorPage.get().findFirst().orElseThrow();
+        assertThat(firstProfessorBySort.getName()).isEqualTo("Curie");
+     }
 
     @Test
     void findByIdWithFetchedRooms() {
