@@ -75,7 +75,14 @@
         <td>
             <span th:if="${b.raum != null}" th:text="${b.raum.name}"></span>
         </td>
-
+        <td>
+            <form action="#"
+                  enctype="multipart/form-data"
+                  th:action="@{'/ui/professoren/'+ ${b.id}}"
+                  th:method="DELETE">
+                <input class="btn" type="submit" value="Delete" width="60"/>
+            </form>
+        </td>
     </tr>
     </tbody>
 
