@@ -9,7 +9,7 @@
 <body>
 <h2>Büros</h2>
 
-<h3>New</h3>
+<h3>Neues Büro</h3>
 <div>
     <form action="#"
           enctype="multipart/form-data"
@@ -29,8 +29,15 @@
             <label>Kapazität</label>
             <input id="Kapazität" th:field="*{kapazitaet}" type="number"/>
         </div>
+        <div>
+            <label>Höhe</label>
+            <input id="Höhe" th:field="*{hoehe}" type="number"/>
+        </div>
+        <div>
+            <label>Fläche</label>
+            <input id="Fläche" th:field="*{flaeche}" type="number"/>
+        </div>
 
-        <!-- TODO: fehlende Attribute ergänzen -->
         <input class="btn" type="submit" value="save" width="60"/>
     </form>
 </div>

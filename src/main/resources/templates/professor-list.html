@@ -9,7 +9,7 @@
 <body>
 <h2>Professoren</h2>
 
-<h3>New</h3>
+<h3>Neuer Professor</h3>
 <div>
     <form action="#"
           enctype="multipart/form-data"
@@ -21,8 +21,21 @@
             <input id="Name" placeholder="Enter Name" th:field="*{name}"
                    type="text"/>
         </div>
-
-        <!-- TODO: fehlende Attribute ergänzen -->
+        <div>
+            <label>rang</label>
+            <input id="Rang" placeholder="Enter Rang" th:field="*{rang}"
+                   type="text"/>
+        </div>
+        <div>
+            <label>personalnummer</label>
+            <input id="Personalnummer" placeholder="Enter Personalnummer" th:field="*{personalnummer}"
+                   type="number"/>
+        </div>
+        <div>
+            <label>gehalt</label>
+            <input id="Gehalt" placeholder="Enter Gehalt" th:field="*{gehalt}"
+                   type="number"/>
+        </div>
         <input class="btn" type="submit" value="save" width="60"/>
     </form>
 </div>

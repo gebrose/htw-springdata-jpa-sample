@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Professor extends HTWEntity {
 
     @Column(name = "pers_nr")
-    private String personalNummer;
+    private Integer personalNummer;
 
     private String name = "N.N.";
 

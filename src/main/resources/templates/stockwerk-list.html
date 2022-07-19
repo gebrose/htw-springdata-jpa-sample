@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="/main.css" rel="stylesheet" type="text/css">
+    <title>Büros</title>
+</head>
+
+<body>
+<h2>Stockwerke</h2>
+
+<h3>New</h3>
+<div>
+    <form action="#"
+          enctype="multipart/form-data"
+          method="POST"
+          th:action="@{'/ui/stockwerke'}"
+          th:object="${stockwerkTemplate}">
+        <div>
+            <label>Geschossnummer</label>
+            <input id="Geschossnummer" placeholder="Enter Geschossnummer" th:field="*{geschossnummer}"
+                   type="text"/>
+        </div>
+
+        <input class="btn" type="submit" value="save" width="60"/>
+    </form>
+</div>
+
+<h3>List</h3>
+<table>
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>Geschossnummer</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="b: ${stockwerke}" th:value="${b}">
+        <td>
+            <span th:text="${b.id}"></span>
+        </td>
+        <td>
+            <span th:text="${b.geschossnummer}"></span>
+        </td>
+        <td>
+            <form action="#"
+                  enctype="multipart/form-data"
+                  th:action="@{'/ui/stockwerke/'+ ${b.id}}"
+                  th:method="DELETE">
+                <input class="btn" type="submit" value="Delete" width="60"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+
+
+</table>
+</body>

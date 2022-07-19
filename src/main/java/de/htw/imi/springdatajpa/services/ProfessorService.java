@@ -19,6 +19,7 @@ public class ProfessorService {
         entity.setName(professorDto.getName());
         entity.setRang(professorDto.getRang());
         entity.setGehalt(professorDto.getGehalt());
+        entity.setPersonalNummer(professorDto.getPersonalnummer());
         return professorRepository.save(entity);
     }
 }
