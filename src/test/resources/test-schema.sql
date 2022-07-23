@@ -147,7 +147,8 @@ CREATE TABLE uni.Ausstattungen
 
 CREATE TABLE uni.studierende
 (
-    matr_nr         INTEGER PRIMARY KEY,
+    id              INTEGER PRIMARY KEY,
+    matr_nr         INTEGER,
     name            VARCHAR(30)    NOT NULL,
     vorname         VARCHAR(30)    NOT NULL,
     geburtsdatum    DATE           NOT NULL,
@@ -188,9 +189,9 @@ CREATE TABLE uni.lehrveranstaltungen
 
 CREATE TABLE uni.teilnehmen
 (
-    matr_nr INTEGER REFERENCES uni.studierende ON DELETE CASCADE,
+    stud_id INTEGER REFERENCES uni.studierende ON DELETE CASCADE,
     lv_nr   INTEGER REFERENCES uni.lehrveranstaltungen ON DELETE CASCADE,
-    PRIMARY KEY (matr_nr, lv_nr)
+    PRIMARY KEY (stud_id, lv_nr)
 );
 
 CREATE TABLE uni.voraussetzen
@@ -202,11 +203,11 @@ CREATE TABLE uni.voraussetzen
 
 CREATE TABLE uni.pruefen
 (
-    matr_nr INTEGER REFERENCES uni.studierende ON DELETE CASCADE,
+    stud_id INTEGER REFERENCES uni.studierende ON DELETE CASCADE,
     lv_nr   INTEGER REFERENCES uni.lehrveranstaltungen,
-    pers_nr INTEGER REFERENCES uni.professoren ON DELETE SET NULL,
+    prof_id INTEGER REFERENCES uni.professoren ON DELETE SET NULL,
     note    NUMERIC(2, 1) CHECK (note between 0.7 and 5.0),
-    PRIMARY KEY (matr_nr, lv_nr)
+    PRIMARY KEY (stud_id, lv_nr)
 );
 
 CREATE VIEW uni.v_Bueros

@@ -17,11 +17,12 @@ import java.nio.charset.StandardCharsets;
  */
 abstract class AbstractRepositoryTest {
 
-    private static final String DROP_SCHEMA = "DROP SCHEMA if exists uni cascade";
+    private static final String DROP_SCHEMA = "DROP SCHEMA IF EXISTS uni CASCADE";
 
     @Value("classpath:test-data.sql")
     private Resource dataInitFile;
 
+    // the test schema is different because it uses H2 SQl syntax
     @Value("classpath:test-schema.sql")
     private Resource schemaInitFile;
 

@@ -120,23 +120,23 @@ VALUES (1, 'Beamer Decke', 'Beamer', '1234-aa', 1999, 2),
        (10, 'Shelf#5', 'Shelf', '1234-sh-5', 2019, 10),
        (11, 'Desk-11', 'Table', '1234-t-11', 2010, 11);
 
-INSERT INTO uni.studierende(matr_nr, name, vorname, geburtsdatum, geburtsort, anzahl_semester, studienbeginn)
-VALUES (24002, 'Xenokrates', 'Anon',    '01-01-1998', 'Athen', 2, 'WS 2021'),
-       (25403, 'Rubens', 'Peter',       '01-01-1997', 'Antwerpen', 3, 'SS 2020'),
-       (25555, 'Diotima', 'Anon',       '01-01-2000', 'Berlin', 6, 'WS 2019'),
-       (26120, 'Lovelace', 'Ada',       '01-01-2000', 'London', 3, 'SS 2020'),
-       (26830, 'Babbage', 'Charles',     '01-01-1999', 'Berlin', 4, 'WS 2020'),
-       (27550, 'Schopenhauer', 'Friedrich', '01-01-2000', 'Berlin', 4, 'WS 2020'),
-       (28106, 'Turing', 'Alan', '01-01-2001', 'London', 4, 'WS 2020'),
-       (29120, 'Theophrastos', 'Anon', '01-01-2000', 'Berlin', 4, 'WS 2020'),
-       (29555, 'Feuerbach', 'Ludwig', '01-01-2000', 'Berlin', 4, 'WS 2020');
+INSERT INTO uni.studierende(id, matr_nr, name, vorname, geburtsdatum, geburtsort, anzahl_semester, studienbeginn)
+VALUES (4002, 24002, 'Xenokrates', 'Anon',    '01-01-1998', 'Athen', 2, 'WS 2021'),
+       (5403, 25403, 'Rubens', 'Peter',       '01-01-1997', 'Antwerpen', 3, 'SS 2020'),
+       (5555, 25555, 'Diotima', 'Anon',       '01-01-2000', 'Berlin', 6, 'WS 2019'),
+       (6120, 26120, 'Lovelace', 'Ada',       '01-01-2000', 'London', 3, 'SS 2020'),
+       (6830, 26830, 'Babbage', 'Charles',     '01-01-1999', 'Berlin', 4, 'WS 2020'),
+       (7550, 27550, 'Schopenhauer', 'Friedrich', '01-01-2000', 'Berlin', 4, 'WS 2020'),
+       (8106, 28106, 'Turing', 'Alan', '01-01-2001', 'London', 4, 'WS 2020'),
+       (9120, 29120, 'Theophrastos', 'Anon', '01-01-2000', 'Berlin', 4, 'WS 2020'),
+       (9555, 29555, 'Feuerbach', 'Ludwig', '01-01-2000', 'Berlin', 4, 'WS 2020');
 
-INSERT INTO uni.professoren(pers_nr, name, rang, raum, gehalt)
+INSERT INTO uni.professoren(id, pers_nr, name, rang, raum, gehalt)
 VALUES (125, 2125, 'Sokrates', 'C4', 1, 58000),
        (126, 2126, 'Russel', 'C4', 7, 60000),
        (127, 2127, 'Kopernikus', 'C3', 11, 60000),
-       (128, 2133, 'Popper', 'C3', 11, 60000),
-       (129, 2134, 'Augustinus', 'C3', 11, 55000),
+       (133, 2133, 'Popper', 'C3', 11, 60000),
+       (134, 2134, 'Augustinus', 'C3', 11, 55000),
        (136, 2136, 'Curie', 'C4', 8, 62000),
        (137, 2137, 'Kant', 'C4', 9, 59000),
        (138, 2138, 'Meitner', 'C4', 10, 65000);
@@ -162,20 +162,20 @@ VALUES (5001, 'Grundzuege', 4, 50, 137),
        (5022, 'Glaube und Wissen', 2, 20, 134),
        (4630, 'Die 3 Kritiken', 4, 20, 137);
 
-INSERT INTO uni.teilnehmen(matr_nr, lv_nr)
-VALUES (26120, 5001),
-       (27550, 5001),
-       (27550, 4052),
-       (28106, 5041),
-       (28106, 5052),
-       (28106, 5216),
-       (28106, 5259),
-       (29120, 5001),
-       (29120, 5041),
-       (29120, 5049),
-       (29555, 5022),
-       (25403, 5022),
-       (29555, 5001);
+INSERT INTO uni.teilnehmen(stud_id, lv_nr)
+VALUES (6120, 5001),
+       (7550, 5001),
+       (7550, 4052),
+       (8106, 5041),
+       (8106, 5052),
+       (8106, 5216),
+       (8106, 5259),
+       (9120, 5001),
+       (9120, 5041),
+       (9120, 5049),
+       (9555, 5022),
+       (5403, 5022),
+       (9555, 5001);
 
 INSERT INTO uni.voraussetzen(vorgaenger, nachfolger)
 VALUES (5001, 5041),
@@ -186,7 +186,7 @@ VALUES (5001, 5041),
        (5041, 5052),
        (5052, 5259);
 
-INSERT INTO uni.pruefen(matr_nr, lv_nr, pers_nr, note)
-VALUES (28106, 5001, 126, 1.0),
-       (25403, 5041, 125, 2.0),
-       (27550, 4630, 137, 2.0);
+INSERT INTO uni.pruefen(stud_id, lv_nr, prof_id, note)
+VALUES (8106, 5001, 126, 1.0),
+       (5403, 5041, 125, 2.0),
+       (7550, 4630, 137, 2.0);
