@@ -1,17 +1,32 @@
 -- Brose, SS 2022
 -- based on: https://db.in.tum.de/teaching/bookDBMSeinf/daten/
 --
--- version for PostgreSQL
+-- version for MS SQL server
 --
--- for MS SQL Server version see separate file
+-- for PostgreSQL version see separate file
 --
--- DROP SCHEMA uni CASCADE;
+
+CREATE DATABASE university;
+GO
+
+USE university;
+GO
 
 CREATE SCHEMA uni;
+GO
 
-CREATE DOMAIN uni.d_semester AS CHAR(7);
+CREATE login application WITH PASSWORD = '1234', default_database = university;
+GO
+CREATE USER uni FOR LOGIN application;
+GO
+USE university;
+GO
+GRANT ALL TO uni;
+GO
 
-CREATE DOMAIN uni.d_semester_anzahl AS SMALLINT CHECK (VALUE BETWEEN 1 and 16);
+CREATE TYPE uni.d_semester FROM CHAR(7); -- MS SQL server: CREATE TYPE SEMESTER FROM [char](7) NULL
+CREATE TYPE uni.d_semester_anzahl FROM SMALLINT
+GO
 
 CREATE TABLE uni.Grundstuecke
 (
@@ -193,16 +208,16 @@ CREATE TABLE uni.lehrveranstaltungen
 
 CREATE TABLE uni.teilnehmen
 (
-    stud_id INTEGER REFERENCES uni.studierende ON DELETE CASCADE,
-    lv_nr   INTEGER REFERENCES uni.lehrveranstaltungen ON DELETE CASCADE,
-    PRIMARY KEY (stud_id, lv_nr)
+    stud_id INTEGER REFERENCES uni.studierende, --ON DELETE CASCADE,
+    lv_nr   INTEGER REFERENCES uni.lehrveranstaltungen --ON DELETE CASCADE,
+        PRIMARY KEY (stud_id, lv_nr)
 );
 
 CREATE TABLE uni.voraussetzen
 (
-    vorgaenger INTEGER REFERENCES uni.lehrveranstaltungen ON DELETE CASCADE,
-    nachfolger INTEGER REFERENCES uni.lehrveranstaltungen ON DELETE CASCADE,
-    PRIMARY KEY (vorgaenger, nachfolger)
+    vorgaenger INTEGER REFERENCES uni.lehrveranstaltungen, -- ON DELETE CASCADE,
+    nachfolger INTEGER REFERENCES uni.lehrveranstaltungen -- ON DELETE CASCADE,
+        PRIMARY KEY (vorgaenger, nachfolger)
 );
 
 CREATE TABLE uni.pruefen
@@ -213,6 +228,11 @@ CREATE TABLE uni.pruefen
     note    NUMERIC(2, 1) CHECK (note between 0.7 and 5.0),
     PRIMARY KEY (stud_id, lv_nr)
 );
+
+CREATE SEQUENCE  uni.id_sequence
+    START WITH 1000;
+
+GO
 
 CREATE VIEW uni.v_Bueros
 AS
@@ -226,6 +246,3 @@ SELECT b.id,
 FROM uni.Raeume r
          JOIN uni.Arbeitsraeume a ON a.id = r.id
          JOIN uni.Bueroraeume b ON b.id = r.id;
-
-CREATE SEQUENCE IF NOT EXISTS uni.id_sequence
-    START 1000;
