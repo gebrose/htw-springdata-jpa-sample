@@ -2,12 +2,15 @@ package de.htw.imi.springdatajpa.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 @javax.persistence.Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(schema = "uni", name = "professoren")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE) //Provide cache strategy.
 @Getter
 @Setter
 public class Professor extends HTWEntity {
@@ -19,7 +22,7 @@ public class Professor extends HTWEntity {
 
     private String rang;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "raum")
     private BueroRaum raum;
 

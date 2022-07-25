@@ -24,7 +24,7 @@ public class Raum extends HTWEntity {
     @Column(name = "raumhoehe")
     private double hoehe;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stockwerk")
     private Stockwerk stockwerk;
 

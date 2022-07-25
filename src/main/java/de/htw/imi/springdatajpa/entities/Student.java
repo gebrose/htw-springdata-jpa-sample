@@ -11,14 +11,12 @@ import java.sql.Date;
 @Table(schema = "uni", name = "studierende")
 @Getter
 @Setter
-public class Studierender extends HTWEntity {
+public class Student extends HTWEntity {
 
     @Column(name = "matr_nr")
     private Integer matrikelNummer;
 
     private String name;
-
-    private String rang;
 
     private String vorname;
 
@@ -30,7 +28,7 @@ public class Studierender extends HTWEntity {
 
     private String studienbeginn;
 
-    public Studierender() {
+    public Student() {
         super();
     }
 

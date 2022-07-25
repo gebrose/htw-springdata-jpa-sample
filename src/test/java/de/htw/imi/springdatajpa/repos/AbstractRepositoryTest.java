@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  * Base class for tests that sets up and deletes
  * the SQL schema and test data for the in-memory test data base
  */
-abstract class AbstractRepositoryTest {
+public abstract class AbstractRepositoryTest {
 
     private static final String DROP_SCHEMA = "DROP SCHEMA IF EXISTS uni CASCADE";
 
